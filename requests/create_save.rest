@@ -1,0 +1,10 @@
+POST http://localhost:3001/api/saves
+Content-Type: application/json
+
+{
+    "data": [[[1, 1], [2, 0]],[[3, 0], [2, 0]],[[1, 0], [6, 0]]],
+    "playerTurn": 1,
+    "playerNumber": 1,
+    "gridDim": { "w": 20, "h": 20 }
+
+}
