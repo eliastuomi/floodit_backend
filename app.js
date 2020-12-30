@@ -8,6 +8,9 @@ const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 const roomsRouter = require('./controllers/rooms')
 
+app.use(express.static('build'))
+
+
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
@@ -21,6 +24,7 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology
     .catch((error) => {
         logger.error('error connection to MongoDB:', error.message)
     })
+
 
 app.use(cors())
 app.use(express.json())
