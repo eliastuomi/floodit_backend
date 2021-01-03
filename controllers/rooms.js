@@ -6,10 +6,13 @@ roomsRouter.post('/', async (request, response) => {
     const body = request.body
 
     const roomData = new Room({
-        roomName: body.userName.concat('_room'),
-        users: [body.userName],
-        host: body.userName,
-        chatLog: []
+        roomName: body.nickName.concat('_room'),
+        users: [body.nickName],
+        host: body.nickName,
+        w: body.w,
+        h: body.h,
+        playerNumber: body.playerNumber,
+        colorNumber: body.colorNumber
     })
     const savedRoom = await roomData.save()
     response.json(savedRoom.toJSON())
@@ -24,9 +27,9 @@ roomsRouter.get('/', async (request, response) => {
 
 roomsRouter.delete('/:id', async (request, response) => {
 
+    const roomToDelete = await Room.findById(request.params.id)
     const deletedRoom = await Room.findByIdAndRemove(request.params.id)
-
-    response.json(deletedRoom)
+    response.json(roomToDelete)
 })
 
 roomsRouter.put('/:id', async (request, response) => {
@@ -36,7 +39,10 @@ roomsRouter.put('/:id', async (request, response) => {
         host: body.host,
         roomName: body.roomName,
         users: body.users,
-        chatLog: body.chatLog
+        w: body.w,
+        h: body.h,
+        playerNumber: body.playerNumber,
+        colorNumber: body.colorNumber
     }
 
     const joinedRoom = await Room.findByIdAndUpdate(request.params.id, room, { new: true })

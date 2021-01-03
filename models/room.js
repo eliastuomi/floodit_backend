@@ -4,7 +4,10 @@ const roomSchema = new mongoose.Schema({
     roomName: String,
     users: Array,
     host: String,
-    chatLog: Array
+    w: Number,
+    h: Number,
+    playerNumber: Number,
+    colorNumber: Number
 })
 
 roomSchema.set('toJSON', {
